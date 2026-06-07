@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.buildsense.BuildSenseAI"
+			"com.buildsense.BuildSenseMod"
 		],
 		"client": [
 			"com.buildsense.client.BuildSenseAIClient"
