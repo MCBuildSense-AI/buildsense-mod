@@ -1,18 +1,17 @@
 {
 	"schemaVersion": 1,
-	"id": "buildsense-ai",
+	"id": "buildsense",
 	"version": "${version}",
 	"name": "BuildSense AI",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Terrain-aware Fabric build planner with AI-assisted ghost overlays.",
 	"authors": [
-		"Me!"
+		"MCBuildSense-AI"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/MCBuildSense-AI/buildsense-mod"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/buildsense-ai/icon.png",
+	"license": "LicenseRef-TBD",
+	"icon": "assets/buildsense/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -22,13 +21,6 @@
 			"com.buildsense.client.BuildSenseAIClient"
 		]
 	},
-	"mixins": [
-		"buildsense-ai.mixins.json",
-		{
-			"config": "buildsense-ai.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.1.2",
