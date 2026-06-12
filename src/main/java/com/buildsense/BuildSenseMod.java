@@ -1,5 +1,6 @@
 package com.buildsense;
 
+import com.buildsense.command.BuildSenseCommands;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,5 +12,6 @@ public class BuildSenseMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("BuildSense AI loaded. First Fabric entrypoint is working.");
+		BuildSenseCommands.register();
 	}
 }
