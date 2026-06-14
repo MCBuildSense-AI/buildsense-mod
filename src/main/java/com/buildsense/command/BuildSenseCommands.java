@@ -1,6 +1,7 @@
 package com.buildsense.command;
 
 import com.buildsense.BuildSenseMod;
+import com.buildsense.config.BuildSenseConfig;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -9,7 +10,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
 public final class BuildSenseCommands {
-
+    public static BuildSenseConfig CONFIG;
     private BuildSenseCommands() {
         // Utility class: do not instantiate.
     }
@@ -27,10 +28,10 @@ public final class BuildSenseCommands {
                                 return 1;
                             })
                             .then(
-                                    Commands.literal("ping")
+                                    Commands.literal("Hello")
                                             .executes(ctx -> {
                                                 ctx.getSource().sendSuccess(
-                                                        () -> Component.literal("pong"),
+                                                        () -> Component.literal("BuildSense AI is alive. Terrain-aware planning, coming up."),
                                                         false
                                                 );
                                                 return 1;
@@ -42,7 +43,7 @@ public final class BuildSenseCommands {
                                                 String version = FabricLoader.getInstance()
                                                         .getModContainer(BuildSenseMod.MOD_ID)
                                                         .map(container -> container.getMetadata().getVersion().getFriendlyString())
-                                                        .orElse("unknown");
+                                                        .orElse("dunknown");
 
                                                 ctx.getSource().sendSuccess(
                                                         () -> Component.literal("BuildSense version: " + version),
