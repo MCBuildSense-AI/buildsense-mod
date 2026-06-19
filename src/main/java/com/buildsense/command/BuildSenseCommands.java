@@ -10,7 +10,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
 public final class BuildSenseCommands {
-    public static BuildSenseConfig CONFIG;
+
     private BuildSenseCommands() {
         // Utility class: do not instantiate.
     }
@@ -28,10 +28,37 @@ public final class BuildSenseCommands {
                                 return 1;
                             })
                             .then(
-                                    Commands.literal("Hello")
+                                    Commands.literal("hello")
                                             .executes(ctx -> {
                                                 ctx.getSource().sendSuccess(
                                                         () -> Component.literal("BuildSense AI is alive. Terrain-aware planning, coming up."),
+                                                        false
+                                                );
+                                                return 1;
+                                            })
+                            )
+                            .then(
+                                    Commands.literal("config")
+                                            .executes(ctx -> {
+                                                // Built inside .executes so it reflects BuildSenseMod.CONFIG
+                                                // at the time the command runs, not a snapshot from startup.
+                                                BuildSenseConfig display = BuildSenseMod.CONFIG.sanitizedForDisplay();
+
+                                                String shown = display.apiKey().isBlank()
+                                                        ? "(none)"
+                                                        : display.apiKey();
+
+                                                String message =
+                                                        "BuildSense config:\n" +
+                                                                "  provider: " + display.provider() + "\n" +
+                                                                "  endpoint: " + display.endpoint() + "\n" +
+                                                                "  model: " + display.model() + "\n" +
+                                                                "  apiKey: " + shown + "\n" +
+                                                                "  timeoutSeconds: " + display.timeoutSeconds() + "\n" +
+                                                                "  maxArea: " + display.maxArea();
+
+                                                ctx.getSource().sendSuccess(
+                                                        () -> Component.literal(message),
                                                         false
                                                 );
                                                 return 1;
@@ -43,7 +70,7 @@ public final class BuildSenseCommands {
                                                 String version = FabricLoader.getInstance()
                                                         .getModContainer(BuildSenseMod.MOD_ID)
                                                         .map(container -> container.getMetadata().getVersion().getFriendlyString())
-                                                        .orElse("dunknown");
+                                                        .orElse("unknown");
 
                                                 ctx.getSource().sendSuccess(
                                                         () -> Component.literal("BuildSense version: " + version),
